@@ -14,3 +14,6 @@ make all
 # Login with cn=admin,dc=example,dc=com / admin
 make ldap-ui
 ```
+
+# Reference
+- https://github.com/Crivaledaz/Mattermost-LDAP

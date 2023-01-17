@@ -36,3 +36,4 @@ terraform.rc
 
 ./idea
 
+/docker-compose/scripts/vault.json
