@@ -1,0 +1,39 @@
+version: '3.7'
+
+networks:
+  vault:
+    ipam:
+      driver: default
+      config:
+        - subnet: "10.5.0.0/16"
+
+services:
+  ldap:
+    image: osixia/openldap:1.5.0
+    restart: always
+    container_name: ldap
+    domainname: "example.com"
+    hostname: "ldap"
+    command: --copy-service
+    environment:
+      LDAP_ORGANISATION: "Example Corp"
+      LDAP_DOMAIN: "example.com"
+      LDAP_ADMIN_PASSWORD: "admin"
+      LDAP_READONLY_USER: "true"
+      LDAP_READONLY_USER_USERNAME: "nwong"
+      LDAP_READONLY_USER_PASSWORD: "readonly"
+    volumes:
+      - ./openldap/bootstrap.ldif:/container/service/slapd/assets/config/bootstrap/ldif/50-bootstrap.ldif
+    ports:
+      - 389:389
+      - 636:636
+  phpldapadmin:
+    image: osixia/phpldapadmin:latest
+    container_name: phpldapadmin
+    environment:
+      PHPLDAPADMIN_LDAP_HOSTS: 'ldap'
+      PHPLDAPADMIN_HTTPS: 'false'
+    ports:
+      - 127.0.0.1:8081:80
+    depends_on:
+      - ldap
