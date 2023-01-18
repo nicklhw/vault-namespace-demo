@@ -11,7 +11,7 @@
 make all
 
 # Bring up php LDAP admin UI
-# Login with cn=admin,dc=example,dc=com / admin
+# Login with cn=admin,dc=hashicorp,dc=com / admin
 make ldap-ui
 ```
 

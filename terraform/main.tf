@@ -14,8 +14,8 @@ provider "vault" {
 resource "vault_ldap_auth_backend" "ldap" {
   path       = "ldap"
   url        = "ldap://ldap"
-  userdn     = "ou=People,dc=example,dc=com"
-  binddn     = "cn=admin,dc=example,dc=com"
+  userdn     = "ou=People,dc=hashicorp,dc=com"
+  binddn     = "cn=admin,dc=hashicorp,dc=com"
   bindpass   = "admin"
   userattr   = "uid"
   discoverdn = false

@@ -12,12 +12,12 @@ services:
     image: osixia/openldap:1.5.0
     restart: always
     container_name: ldap
-    domainname: "example.com"
+    domainname: "hashicorp.com"
     hostname: "ldap"
     command: --copy-service
     environment:
-      LDAP_ORGANISATION: "Example Corp"
-      LDAP_DOMAIN: "example.com"
+      LDAP_ORGANISATION: "HashiCorp"
+      LDAP_DOMAIN: "hashicorp.com"
       LDAP_ADMIN_PASSWORD: "admin"
     volumes:
       - ./openldap/bootstrap.ldif:/container/service/slapd/assets/config/bootstrap/ldif/50-bootstrap.ldif

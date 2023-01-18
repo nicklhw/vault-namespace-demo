@@ -1,17 +1,17 @@
 # Define OU for people
-dn: ou=People,dc=example,dc=com
+dn: ou=People,dc=hashicorp,dc=com
 description: Company Employees
 objectclass: organizationalUnit
 objectclass: top
 ou: People
 
 # Entry 1: Nick Wong
-dn: uid=nwong,ou=People,dc=example,dc=com
+dn: uid=nwong,ou=People,dc=hashicorp,dc=com
 uid: nwong
 cn: Nick Wong
 sn: Wong
 gn: Nick
-mail: nick.wong@example.com
+mail: nick.wong@hashicorp.com
 objectClass: inetOrgPerson
-# Password : test1234
-userPassword: {SSHA}GFR6gX9RlEj/AaP5mxpdCh1J1FM/pyn3
+# Password : passw0rd
+userPassword: {SSHA}hSKZC8QZJRn1e+yUzMkbjQz3kql/OA0C
