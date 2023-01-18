@@ -17,6 +17,7 @@ init:
 clean:
 	cd docker-compose \
 	&& docker-compose down --volumes \
+	&& rm -f ./scripts/vault.json \
 	&& rm -f ../terraform/terraform.tfstate \
 	&& rm -f ../terraform/terraform.tfstate.backup
 

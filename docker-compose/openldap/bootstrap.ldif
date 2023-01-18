@@ -1,12 +1,28 @@
-# Define OU for people
-dn: ou=People,dc=hashicorp,dc=com
+dn: ou=Users,dc=hashicorp,dc=com
 description: Company Employees
 objectclass: organizationalUnit
 objectclass: top
-ou: People
+ou: Users
 
-# Entry 1: Nick Wong
-dn: uid=nwong,ou=People,dc=hashicorp,dc=com
+dn: ou=Customer Success,ou=Users,dc=hashicorp,dc=com
+description: Customer Success Org
+objectclass: organizationalUnit
+objectclass: top
+ou: Customer Success
+
+dn: ou=Vault US East,ou=Customer Success,ou=Users,dc=hashicorp,dc=com
+description: Customer Success Vault US East Team
+objectclass: organizationalUnit
+objectclass: top
+ou: Vault US East
+
+dn: ou=Vault US West,ou=Customer Success,ou=Users,dc=hashicorp,dc=com
+description: Customer Success Vault US West Team
+objectclass: organizationalUnit
+objectclass: top
+ou: Vault US West
+
+dn: uid=nwong,ou=Vault US East,ou=Customer Success,ou=Users,dc=hashicorp,dc=com
 uid: nwong
 cn: Nick Wong
 sn: Wong
@@ -15,3 +31,55 @@ mail: nick.wong@hashicorp.com
 objectClass: inetOrgPerson
 # Password : passw0rd
 userPassword: {SSHA}hSKZC8QZJRn1e+yUzMkbjQz3kql/OA0C
+
+dn: uid=dchan,ou=Vault US East,ou=Customer Success,ou=Users,dc=hashicorp,dc=com
+uid: dchan
+cn: Dennis Chan
+sn: Chan
+gn: Dennis
+mail: dennis.chan@hashicorp.com
+objectClass: inetOrgPerson
+# Password : passw0rd
+userPassword: {SSHA}hSKZC8QZJRn1e+yUzMkbjQz3kql/OA0C
+
+dn: uid=csnyders,ou=Vault US West,ou=Customer Success,ou=Users,dc=hashicorp,dc=com
+uid: csnyders
+cn: Chris Snyders
+sn: Snyders
+gn: Chris
+mail: chris.snyders@hashicorp.com
+objectClass: inetOrgPerson
+# Password : passw0rd
+userPassword: {SSHA}hSKZC8QZJRn1e+yUzMkbjQz3kql/OA0C
+
+dn: uid=ishackleford,ou=Vault US West,ou=Customer Success,ou=Users,dc=hashicorp,dc=com
+uid: ishackleford
+cn: Ira Shackleford
+sn: Shackleford
+gn: Ira
+mail: ira.shackleford@hashicorp.com
+objectClass: inetOrgPerson
+# Password : passw0rd
+userPassword: {SSHA}hSKZC8QZJRn1e+yUzMkbjQz3kql/OA0C
+
+dn: ou=Groups,dc=hashicorp,dc=com
+description: Company Groups
+objectclass: organizationalUnit
+objectclass: top
+ou: Groups
+
+dn: ou=Customer Success US East Vault Admins,ou=Groups,dc=hashicorp,dc=com
+objectclass: top
+objectclass: groupofuniquenames
+cn: Customer Success US East Vault Admins
+description: Customer Success US East Vault Admins
+uniqueMember: uid=nwong,ou=Vault US East,ou=Customer Success,ou=Users,dc=hashicorp,dc=com
+uniqueMember: uid=dchan,ou=Vault US East,ou=Customer Success,ou=Users,dc=hashicorp,dc=com
+
+dn: ou=Customer Success US West Vault Admins,ou=Groups,dc=hashicorp,dc=com
+objectclass: top
+objectclass: groupofuniquenames
+cn: Customer Success US West Vault Admins
+description: Customer Success US West Vault Admins
+uniqueMember: uid=csnyders,ou=Vault US West,ou=Customer Success,ou=Users,dc=hashicorp,dc=com
+uniqueMember: uid=ishackleford,ou=Vault US West,ou=Customer Success,ou=Users,dc=hashicorp,dc=com
