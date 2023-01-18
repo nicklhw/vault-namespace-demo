@@ -30,6 +30,6 @@ tput setaf 12 && echo "############## Enable userpass auth on Vault ############
 
 vault auth enable userpass
 
-vault write auth/userpass/users/tester password="changeme" policies="admin"
+vault write auth/userpass/users/admin password="passw0rd" policies="admin"
 
 tput setaf 12 && echo "############## Please Run: export VAULT_TOKEN=${VAULT_TOKEN} ##############"
