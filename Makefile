@@ -1,14 +1,16 @@
 .DEFAULT_GOAL := all
 .PHONY: clean up-detach init show-members ui token
 
-export VAULT_TOKEN := $(shell cat docker-compose/scripts/vault.json | jq -r '.root_token')
 export VAULT_ADDR := http://localhost:8200
 
-all: clean up-detach init
+all: clean up-detach minikube-start init tf-apply deploy-app
 
 up-detach:
 	cd docker-compose \
 	  && docker-compose up --detach --remove-orphans
+
+minikube-start:
+	minikube start
 
 init:
 	cd docker-compose/scripts \
@@ -34,8 +36,8 @@ ui:
 ldap-ui:
 	open http://localhost:8081
 
-token:
-	cat docker-compose/scripts/vault_c1.json | jq -r '.root_token' | pbcopy
+tf-apply: export VAULT_TOKEN = $(shell cat docker-compose/scripts/vault.json | jq -r '.root_token')
+tf-destroy: export VAULT_TOKEN = $(shell cat docker-compose/scripts/vault.json | jq -r '.root_token')
 
 tf-apply:
 	cd terraform \
