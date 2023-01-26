@@ -24,6 +24,11 @@ admin/passw0rd
 nwong/passw0rd
 ```
 
+# LDAP Admin
+```shell
+cn=admin,dc=hashicorp,dc=com/admin
+```
+
 # Reference
 - [LDAP container reference](https://github.com/Crivaledaz/Mattermost-LDAP)
 - [Integrate a K8s cluster with an external Vault](https://developer.hashicorp.com/vault/tutorials/kubernetes/kubernetes-external-vault)
