@@ -1,0 +1,2 @@
+injector:
+  externalVaultAddr: 'http://external-vault:8200'

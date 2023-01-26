@@ -32,4 +32,10 @@ vault auth enable userpass
 
 vault write auth/userpass/users/admin password="passw0rd" policies="admin"
 
+tput setaf 12 && echo "############## Enable audit device ##############"
+
+vault audit enable file file_path=/var/log/vault/vault-audit.log mode=744
+
 tput setaf 12 && echo "############## Please Run: export VAULT_TOKEN=${VAULT_TOKEN} ##############"
+
+./init_haproxy.sh

@@ -46,6 +46,20 @@ data "template_file" "cs-us-west-vault-admin-policy" {
   }
 }
 
+data "template_file" "cs-us-east-app-policy" {
+  template = "${file("${path.module}/app_policy.tpl")}"
+  vars = {
+    namespace = "${vault_namespace.cs-children["us-east"].path}"
+  }
+}
+
+data "template_file" "cs-us-west-app-policy" {
+  template = "${file("${path.module}/app_policy.tpl")}"
+  vars = {
+    namespace = "${vault_namespace.cs-children["us-west"].path}"
+  }
+}
+
 resource "vault_policy" "cs-us-east-vault-admin" {
   name = "cs-us-east-vault-admin"
   policy = data.template_file.cs-us-east-vault-admin-policy.rendered
@@ -54,6 +68,18 @@ resource "vault_policy" "cs-us-east-vault-admin" {
 resource "vault_policy" "cs-us-west-vault-admin" {
   name = "cs-us-west-vault-admin"
   policy = data.template_file.cs-us-west-vault-admin-policy.rendered
+}
+
+resource "vault_policy" "cs-us-east-app" {
+  namespace = vault_namespace.customer-success.path
+  name = "cs-us-east-app"
+  policy = data.template_file.cs-us-east-app-policy.rendered
+}
+
+resource "vault_policy" "cs-us-west-app" {
+  namespace = vault_namespace.customer-success.path
+  name = "cs-us-west-app"
+  policy = data.template_file.cs-us-west-app-policy.rendered
 }
 
 resource "vault_ldap_auth_backend" "ldap" {
@@ -82,7 +108,7 @@ resource "vault_ldap_auth_backend_group" "cs-us-west-vault-admin" {
 resource "vault_mount" "kvv2" {
   for_each  = local.cs-child-namespaces
   namespace = vault_namespace.cs-children[each.key].path_fq
-  path      = "secrets"
+  path      = "secret"
   type      = "kv"
   options = {
     version = "2"

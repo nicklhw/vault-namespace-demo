@@ -33,7 +33,7 @@ path "${namespace}/auth/token/*" {
    capabilities = ["create", "read", "update", "delete", "list", "sudo"]
 }
 
-# Manage secrets at 'secrets'
-path "${namespace}/secrets/*" {
+# Manage secrets at 'secret'
+path "${namespace}/secret/*" {
    capabilities = ["create", "read", "update", "delete", "list"]
 }

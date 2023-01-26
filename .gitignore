@@ -37,3 +37,4 @@ terraform.rc
 ./idea
 
 /docker-compose/scripts/vault.json
+/docker-compose/vault/audit_logs

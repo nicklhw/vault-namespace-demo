@@ -45,3 +45,7 @@ tf-apply:
 tf-destroy:
 	cd terraform \
 	&& terraform destroy --auto-approve
+
+deploy-app:
+	cd minikube \
+	&& ./setup.sh
