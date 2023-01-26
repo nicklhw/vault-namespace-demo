@@ -1,19 +1,23 @@
 #!/bin/bash
 
-export NAMESPACE=us-east
+for ns in us-east us-west
+do
+    tput setaf 12 && echo "Deploying app in namespace ${ns} ..." && tput sgr0
 
-POD_NAME=$(kubectl get pods -n us-east --output='jsonpath={.items[].metadata.name}')
+    export NAMESPACE=${ns}
+    POD_NAME=$(kubectl get pods -n ${NAMESPACE} --output='jsonpath={.items[].metadata.name}')
 
-kubectl delete serviceaccount app -n us-east
-kubectl delete deployment app -n us-east
-kubectl delete pod $POD_NAME -n us-east
+    kubectl delete serviceaccount app -n ${NAMESPACE}
+    kubectl delete deployment app -n ${NAMESPACE}
+    kubectl delete pod ${POD_NAME} -n ${NAMESPACE}
 
-envsubst < app.yaml| kubectl apply -n us-east -f -
+    envsubst < app.yaml| kubectl apply -n ${NAMESPACE} -f -
 
-POD_NAME=$(kubectl get pods -n us-east --output='jsonpath={.items[].metadata.name}')
+    POD_NAME=$(kubectl get pods -n ${NAMESPACE} --output='jsonpath={.items[].metadata.name}')
 
-echo "Scheduling pod $POD_NAME ..."
+    tput setaf 12 && echo "Scheduling pod ${POD_NAME} ..." && tput sgr0
 
-sleep 5
+    sleep 5
 
-kubectl logs $POD_NAME -n us-east -c vault-agent-init
+    kubectl logs ${POD_NAME} -n ${NAMESPACE} -c vault-agent-init
+done

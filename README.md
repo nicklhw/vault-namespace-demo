@@ -9,6 +9,19 @@ export VAULT_LICENSE=$(cat ~/Downloads/vault.hclic)
 # Start all containers and minikube
 make all
 
+# Port forward and open web page to view secret
+kubectl port-forward <name of app pod> -n us-east 8080:8080
+
+open http://127.0.0.1:8080
+```
+
+# Vault Users
+```shell
+# Userpass
+admin/passw0rd
+
+# LDAP
+nwong/passw0rd
 ```
 
 # Reference

@@ -24,12 +24,12 @@ spec:
         # AGENT INJECTOR SETTINGS
         vault.hashicorp.com/agent-inject: "true"
         vault.hashicorp.com/agent-inject-status: "update"
-        vault.hashicorp.com/agent-inject-secret-kv-secret: "us-east/secret/data/myapp"
+        vault.hashicorp.com/agent-inject-secret-kv-secret: $NAMESPACE/secret/data/myapp
         vault.hashicorp.com/agent-inject-template-kv-secret: |
-          {{ with secret "us-east/secret/data/myapp" }}{{ .Data.data | toJSONPretty }}{{ end }}
+          {{ with secret "$NAMESPACE/secret/data/myapp" }}{{ .Data.data | toJSONPretty }}{{ end }}
         # VAULT SETTINGS
         vault.hashicorp.com/namespace: "customer-success"
-        vault.hashicorp.com/role: "us-east"
+        vault.hashicorp.com/role: $NAMESPACE
       labels:
         app: vault-agent-demo
     spec:
